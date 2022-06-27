@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crear Usuario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+    <h2>Creacion de usuario</h2>  
+    <form method="post" action="/create" enctype="multipart/form-data">
+        <br>
+        Email:
+        <input type="text" name="txtemail" id="txtemail" >
+        <br>
+        <br>
+        Nombre de Usuario:
+        <input type="text" name="txtusuario" id="txtusuario">
+        <br>
+        <br>
+        Contrasena:
+        <input type="password" name="txtpasswd" id="txtpasswd">
+        <br>
+        <br>
+        <input type="submit" value="Agregar">
+    </form>
+    <br>
+    <table class="table table-light">
+        <thead class="thead-light">
+            <tr>
+                <th>Usuario</th>
+                <th>Correo</th>
+                <th>fecha de Creacion</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{usuario[1]}}</td>
+                <td>{{usuario[2]}}</td>
+                <td>{{usuario[4]}}</td>
+                <td> 
+                    <a href="/editar/{{usuario[0]}}">Editar</a> |
+                    <a href="/eliminar/{{usuario[0]}}">Eliminar</a>
+                   </td>
+            </tr>  
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/">Regresar</a>
+</body>
+</html>
