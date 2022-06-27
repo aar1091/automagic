@@ -13,7 +13,7 @@ mysql.init_app(app)
 
 @app.route('/')
 def index():
-     return render_template ('index.html')
+     return render_template ('auth.html')
 
 #Crear usuario
 @app.route('/create')
