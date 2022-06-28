@@ -1,6 +1,8 @@
 
+#https://codeshack.io/login-system-python-flask-mysql/
 from flask import Flask, render_template, request, redirect
 from flaskext.mysql import MySQL
+from pip import main
  
 app = Flask(__name__)
 
@@ -14,6 +16,10 @@ mysql.init_app(app)
 @app.route('/')
 def index():
      return render_template ('auth.html')
+
+@app.route("/login", methods=['POST'])
+def login ():
+    return redirect ('/main')
 
 #Crear usuario
 @app.route('/create')
@@ -77,9 +83,9 @@ def modify():
     conn.commit() 
     return redirect ('/create')
 
-@app.route('/login')
-def login():
-    return render_template('auth.html')
+@app.route('/main')
+def main():
+    return render_template('index.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
