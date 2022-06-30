@@ -1,14 +1,39 @@
+from flask import Flask, render_template, request, redirect, url_for, session
+from flaskext.mysql import MySQL
+import re
 
-#Make sure that flask_login and bcrypt are installed
-from flask_login import login_user,logout_user,current_user,UserMixin
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_bcrypt import Bcrypt
+app = Flask(__name__)
 
-#Position all of this after the db and app have been initialised
-bcrypt = Bcrypt(app)
-login_manager = LoginManager()
-login_manager.init_app(app)
-@login_manager.user_loader
-def user_loader(user_id):
-    #TODO change here
-    return User.query.get(user_id)
+app.secret_key = 'Teletubies123'
+
+mysql = MySQL()
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'Teletubies123'
+app.config['MYSQL_DATABASE_DB'] = 'devices'
+mysql.init_app(app)
+
+@app.route('/pythonlogin/', methods=['GET', 'POST'])
+def login():
+    msg = ''
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        username = request.form['username']
+        password = request.form['password']
+        conn = mysql.connect()
+        cursor=conn.cursor()
+        cursor.execute('SELECT * FROM devices.user WHERE username = %s AND password = %s', (username, password,))
+        usuarios = cursor.fetchone()
+        conn.commit()
+        if usuarios:
+            session['loggedin'] = True
+            session['id'] = usuarios[0]
+            session['username'] = usuarios[1]
+            return 'Logged in successfully!'
+        else:
+            msg = 'Incorrect username/password!'
+    return render_template('index.html', msg=msg)
+
+    
+
+if __name__ == "__main__":
+    app.run(debug=True)

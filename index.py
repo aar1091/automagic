@@ -2,7 +2,6 @@
 #https://codeshack.io/login-system-python-flask-mysql/
 from flask import Flask, render_template, request, redirect
 from flaskext.mysql import MySQL
-from pip import main
  
 app = Flask(__name__)
 
