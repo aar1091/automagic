@@ -13,7 +13,7 @@ app.config['MYSQL_DATABASE_PASSWORD'] = 'Teletubies123'
 app.config['MYSQL_DATABASE_DB'] = 'devices'
 mysql.init_app(app)
 
-@app.route('/pythonlogin/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login():
     msg = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
@@ -28,12 +28,24 @@ def login():
             session['loggedin'] = True
             session['id'] = usuarios[0]
             session['username'] = usuarios[1]
-            return 'Logged in successfully!'
+            return redirect('/home')
         else:
             msg = 'Incorrect username/password!'
     return render_template('index.html', msg=msg)
 
-    
+@app.route('/logout')
+def logout():
+   session.pop('loggedin', None)
+   session.pop('id', None)
+   session.pop('username', None)
+
+   return redirect('/')
+
+@app.route('/home')
+def home():
+    if 'loggedin' in session:
+        return render_template('home.html', username=session['username'])
+    return redirect('/')
 
 if __name__ == "__main__":
     app.run(debug=True)
