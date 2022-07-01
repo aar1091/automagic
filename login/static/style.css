@@ -6,7 +6,7 @@
     -moz-osx-font-smoothing: grayscale;
 }
 body {
-    background-color: #435165;
+    background-color: #005c96b5;
     margin: 0;
 }
 .login, .register {
@@ -78,7 +78,7 @@ body {
     transition: background-color 0.2s;
 }
 .navtop {
-    background-color: #2f3947;
+    background-color: #2868c7;
     height: 60px;
     width: 100%;
     border: 0;

@@ -38,7 +38,6 @@ def logout():
    session.pop('loggedin', None)
    session.pop('id', None)
    session.pop('username', None)
-
    return redirect('/')
 
 @app.route('/home')
@@ -46,6 +45,27 @@ def home():
     if 'loggedin' in session:
         return render_template('home.html', username=session['username'])
     return redirect('/')
+
+@app.route("/user")
+def user():
+    conn = mysql.connect()
+    cursor=conn.cursor()
+    cursor.execute("SELECT * FROM devices.user;")
+    usuarios = cursor.fetchall()
+    conn.commit() 
+    return render_template ('user.html', usuarios=usuarios)
+
+@app.route('/eliminar/<int:id>')
+def eliminar(id):
+    conn = mysql.connect()
+    cursor=conn.cursor()
+    cursor.execute("DELETE FROM devices.user WHERE id=%s",(id))
+    conn.commit() 
+    return redirect("/user")
+
+@app.route('/run')
+def run():
+    return render_template('/run.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
