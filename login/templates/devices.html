@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% block title %}Devices{% endblock %}
+
+{% block content %}
+
+
+<h2>Agregar Dispositivos</h2>
+
+<form action="/user" method="post" autocomplete="off" enctype="multipart/form-data">
+    <br>
+    <label for="hostname">
+        <i class="fas fa-asterisk"></i>
+    </label>
+    <input type="text" name="txthostname" placeholder="Hostname" id="txthostname" required>
+    <label for="ip">
+        <i class="fas fa-adjust"></i>
+    </label>
+    <input type="text" name="txtip" placeholder="IP" id="txtip" required>
+    <label for="location">
+        <i class="fas fa-location-arrow"></i>
+    </label>
+    <input type="text" size="50" name="txtlocation" placeholder="Location" id="txtlocation" required >
+    <div class="msg">{{ msg }}</div>
+    <br>
+    <input type="submit" value="Agregar">
+</form>
+{% for dev in devices %}
+<div>
+    <table>
+        <tr>
+            <td>Hostname:</td>
+            <td>{{ dev[1] }}</td>
+        </tr>
+        <tr>
+            <td>IP:</td>
+            <td>{{ dev[2] }}</td>
+        </tr>
+        <tr>
+            <td>Location:</td>
+            <td>{{ dev[3] }}</td>
+        </tr>
+        <tr>
+            <td>    
+            
+        </td>
+        </tr>
+    </table>
+    <a href="/user"><i class="fas fa-user-edit"></i>Edit</a>
+    <a href="/eliminar/{{dev[0]}}"><i class="fas fa-trash"></i>Delete</a>
+</div>
+{% endfor %}
+
+{% endblock %}

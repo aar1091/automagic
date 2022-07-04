@@ -14,9 +14,9 @@
      <div class="row" style="margin-bottom: 40px;">
         <div class="col">
             <form id="demoform">
-         <select multiple="multiple" size="10" name="duallistbox_demo1[]" title="duallistbox_demo1[]">
-             {% for usr in usuarios %}
-                   <option value="payee1">{{ usr[1] }}</option>
+         <select multiple="multiple" size="10" name="listbox1" title="listbox1">
+             {% for dev in devices %}
+                   <option value="payee1">{{ dev[2] }} - {{ dev[1] }} </option>
              {% endfor %}  
         </select>
          <br>     
