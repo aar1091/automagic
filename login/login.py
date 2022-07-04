@@ -55,6 +55,20 @@ def user():
     conn.commit() 
     return render_template ('user.html', usuarios=usuarios)
 
+@app.route('/user', methods=['POST'])
+def storage():
+    _email = request.form['txtemail']
+    _usuario = request.form['txtusername']
+    _passwrd = request.form['txtpassword']
+    
+    sql ="INSERT INTO `devices`.`user` (`email`, `username`, `password`) VALUES (%s,%s,%s);"
+    datos =(_email,_usuario,_passwrd)
+    conn = mysql.connect()
+    cursor=conn.cursor()
+    cursor.execute(sql,datos)
+    conn.commit() 
+    return redirect ('/user')
+
 @app.route('/eliminar/<int:id>')
 def eliminar(id):
     conn = mysql.connect()
@@ -65,7 +79,12 @@ def eliminar(id):
 
 @app.route('/run')
 def run():
-    return render_template('/run.html')
+    conn = mysql.connect()
+    cursor=conn.cursor()
+    cursor.execute("SELECT * FROM devices.user;")
+    usuarios = cursor.fetchall()
+    conn.commit() 
+    return render_template ('run.html', usuarios=usuarios)
 
 if __name__ == "__main__":
     app.run(debug=True)

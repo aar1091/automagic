@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+function pasar() {
+	obj=document.getElementById('sel1');
+	if (obj.selectedIndex==-1) return;
+	valor=obj.value;
+	txt=obj.options(obj.selectedIndex).text;
+	obj.options[obj.selectedIndex]=null;
+	obj2=document.getElementById('sel2');
+	opc = new Option(txt,valor);
+	eval(obj2.options[obj2.options.length]=opc);	
+}
+</script>
+</head>
+
+<body>
+<select id="sel1" size="5">
+<option value="1">Uno</option>
+<option value="2">Dos</option>
+<option value="3">Tres</option>
+<option value="4">Cuatro</option>
+<option value="5">Cinco</option>
+</select>
+<input type="button" value="Pasar" onClick="pasar()">
+<select id="sel2" size="5">
+</select>
+</body>
+</html>

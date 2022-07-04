@@ -3,6 +3,26 @@
 {% block title %}Run{% endblock %}
 
 {% block content %}
-<h2>Home Page</h2>
-<p>Welcome back, {{ username }}!</p>
+<div class="container">
+  <div class="row" style="margin-top: 40px;">
+    <div class="col">
+      <h2> Ejecutar </h2>
+      <p><strong>Step 1:</strong>Paso 2: Selecciones Los Equipos a aplicar el comando</p>
+      <hr/>
+    </div>
+  </div>
+     <div class="row" style="margin-bottom: 40px;">
+        <div class="col">
+            <form id="demoform">
+         <select multiple="multiple" size="10" name="duallistbox_demo1[]" title="duallistbox_demo1[]">
+             {% for usr in usuarios %}
+                   <option value="payee1">{{ usr[1] }}</option>
+             {% endfor %}  
+        </select>
+         <br>     
+        </div>
+     </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

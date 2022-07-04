@@ -3,7 +3,28 @@
 {% block title %}Profile{% endblock %}
 
 {% block content %}
-<h2>Profile Page</h2>
+
+
+<h2>Agregar Usuario</h2>
+
+<form action="/user" method="post" autocomplete="off" enctype="multipart/form-data">
+    <br>
+    <label for="username">
+        <i class="fas fa-user"></i>
+    </label>
+    <input type="text" name="txtusername" placeholder="Username" id="txtusername" required>
+    <label for="password">
+        <i class="fas fa-lock"></i>
+    </label>
+    <input type="password" name="txtpassword" placeholder="Password" id="txtpassword" required>
+    <label for="email">
+        <i class="fas fa-envelope"></i>
+    </label>
+    <input type="email" name="txtemail" placeholder="Email" id="txtemail" required>
+    <div class="msg">{{ msg }}</div>
+    <br>
+    <input type="submit" value="Agregar">
+</form>
 {% for usr in usuarios %}
 <div>
     <table>
