@@ -6,6 +6,19 @@
 		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script type="text/javascript">
+
+   function cambiar(list){
+            aa=(list==0)?"list2":"list1";
+            bb=(list==0)?"list1":"list2";
+            a=document.forms[0][aa];
+            b=document.forms[0][bb];
+            if(a.value==''){return false;}
+            seVa=a.options[a.selectedIndex];
+            a[a.selectedIndex]=null;
+            b.options[b.options.length]=seVa;
+            }
+        </script>
 	</head>
 	<body class="loggedin">
 		<nav class="navtop">
@@ -22,4 +35,5 @@
 			{% block content %}{% endblock %}
 		</div>
 	</body>
+    
 </html>

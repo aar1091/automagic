@@ -55,16 +55,6 @@ def user():
     conn.commit() 
     return render_template ('user.html', usuarios=usuarios)
 
-@app.route("/devices")
-def devices():
-    conn = mysql.connect()
-    cursor=conn.cursor()
-    cursor.execute("SELECT * FROM devices.devices;")
-    devices = cursor.fetchall()
-    conn.commit()
-    conn.close() 
-    return render_template ('devices.html', devices=devices)
-
 @app.route('/user', methods=['POST'])
 def storage():
     _email = request.form['txtemail']
@@ -86,6 +76,38 @@ def eliminar(id):
     cursor.execute("DELETE FROM devices.user WHERE id=%s",(id))
     conn.commit() 
     return redirect("/user")
+
+@app.route("/devices")
+def devices():
+    conn = mysql.connect()
+    cursor=conn.cursor()
+    cursor.execute("SELECT * FROM devices.devices;")
+    devices = cursor.fetchall()
+    conn.commit()
+    conn.close() 
+    return render_template ('devices.html', devices=devices)
+
+@app.route('/devices', methods=['POST'])
+def devicesPost():
+    _hostname = request.form['txthostname']
+    _ip = request.form['txtip']
+    _location = request.form['txtlocation']
+    
+    sql ="INSERT INTO `devices`.`devices` (`hostname`, `ip`, `location`) VALUES (%s,%s,%s);"
+    datos =(_hostname,_ip,_location)
+    conn = mysql.connect()
+    cursor=conn.cursor()
+    cursor.execute(sql,datos)
+    conn.commit() 
+    return redirect ('/devices')
+
+@app.route('/eliminardev/<int:id>')
+def eliminardev(id):
+    conn = mysql.connect()
+    cursor=conn.cursor()
+    cursor.execute("DELETE FROM devices.devices WHERE id=%s",(id))
+    conn.commit() 
+    return redirect("/devices")
 
 @app.route('/run')
 def run():

@@ -13,16 +13,30 @@
   </div>
      <div class="row" style="margin-bottom: 40px;">
         <div class="col">
-            <form id="demoform">
-         <select multiple="multiple" size="10" name="listbox1" title="listbox1">
-             {% for dev in devices %}
-                   <option value="payee1">{{ dev[2] }} - {{ dev[1] }} </option>
-             {% endfor %}  
-        </select>
-         <br>     
+            <form>
+            <select name="list1" size="13"> 
+                {% for dev in devices %}
+                        <option value="0">{{ dev[2] }} - {{ dev[1] }} </option>
+                {% endfor %}  
+            </select>
+            <input type="button"value="->" onclick="cambiar(1)">
+            <input type="button"value="<-" onclick="cambiar(0)">
+
+            <select name="list2" size="13">
+            </select>
+            </form>
         </div>
      </div>
     </div>
   </div>
 </div>
+
+<div class="form-group">
+    <label for="my-select">Text</label>
+    <select id="my-select" class="form-control" name="" multiple>
+        <option>Text</option>
+    </select>
+</div>
+
 {% endblock %}
+
